@@ -1,0 +1,104 @@
+---
+import Course from "./Course.astro";
+
+---
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"
+/>
+<script is:inline src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+
+</head>
+<!-- Slider main container -->
+<div class="swiper" transition:persist>
+    <p class="text-2xl text-gray-50 py-2 font-semibold">Choose Courses</p>
+    <!-- Additional required wrapper -->
+    <div class="swiper-wrapper">
+      <!-- Slides -->
+      <div class="swiper-slide">
+        <Course
+        title="Writing Task 1"
+        desc="In this course you will learn how to write letters"
+        link="#"
+        author="By Sarvar Khatamov"
+        like="like"
+        />
+      </div>
+      <div class="swiper-slide">
+        <Course
+        title="Writing Task 2"
+        desc="In this course you will learn how to write essays"
+        link="#"
+        author="By Javlon Kubayev"
+        like="like"
+        />
+      </div>
+      <div class="swiper-slide">
+        <Course
+        title="Speaking Lessons"
+        desc="In this course you will learn about Speaking"
+        link="#"
+        author="By Teacher Muzaffar"
+        like="like"
+        />
+      </div>
+
+    </div>
+
+ 
+
+  </div>
+
+<script is:inline>
+ const swiper = new Swiper('.swiper', {
+      pagination: {
+        el: ".swiper-pagination",
+      },
+    });
+</script>
+
+
+<style>
+  .swiper{
+    width:300px;
+  }
+
+  
+
+  @media screen and (max-width:660px) {
+    .swiper{
+    width:90%;
+  }
+  }
+</style>
+
+
+<script is:inline>
+// Select all elements with the "like-button" class
+var likeButtons = document.querySelectorAll("#like");
+
+// Function to update the like button state and save it to localStorage
+function updateLikeState(event) {
+  var likeButton = event.target;
+  likeButton.classList.toggle("text-rose-500");
+  // Save the current state to localStorage
+  var isLiked = likeButton.classList.contains("text-rose-500");
+  localStorage.setItem("isLiked", isLiked);
+}
+
+// Add a click event listener to each like button
+likeButtons.forEach(function(likeButton) {
+  likeButton.addEventListener('click', updateLikeState);
+});
+
+// Function to load the like button state from localStorage when the window is loaded
+window.addEventListener('load', function () {
+  var isLiked = localStorage.getItem("isLiked");
+  if (isLiked === "true") {
+    likeButtons.forEach(function(likeButton) {
+      likeButton.classList.add("text-rose-500");
+    });
+  }
+});
+
+
+</script>
